@@ -1,6 +1,8 @@
 package com.hyd.kafkaclient.gui.panel;
 
+import com.hyd.kafkaclient.Application;
 import com.hyd.kafkaclient.gui.window.DetailPopWindow;
+import com.hyd.kafkaclient.kafka.KafkaDataManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,7 +55,8 @@ public class BodySection extends JPanel
         String msgValue = jTable.getValueAt(row, kafkaMsgTableModel.getColumnCount() - 1).toString();
         System.out.println("selected row:"+msgValue);
         DetailPopWindow detailPopWindow = new DetailPopWindow();
-        detailPopWindow.show();
+        String topic = Application.getInstance().getCurrentTopic();
+        detailPopWindow.show(KafkaDataManager.getInstance().getTopicMsg(topic).get(row));
     }
 
     public void updateView()
